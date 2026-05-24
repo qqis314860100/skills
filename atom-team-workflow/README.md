@@ -68,7 +68,9 @@
 skill 主体保持轻量，详细交付材料放在 `references/` 里按需读取：
 
 - `references/老项目重构检查表.md`
+- `references/企业级老项目重构规则.md`
 - `references/新项目启动检查表.md`
+- `references/企业级新项目门禁.md`
 - `references/前后端契约模板.md`
 - `references/发布回滚检查表.md`
 
