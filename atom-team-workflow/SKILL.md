@@ -1,235 +1,239 @@
 ---
 name: atom-team-workflow
-description: Lightweight but enterprise-aware delivery workflow for solo or small software teams, especially frontend/backend 1+1 teams using AI assistance. Use when asked to shape a practical workflow for a new product, legacy refactor, modernization, performance/UI upgrade, feature slice, validation rules, commit/PR discipline, rollout safety, or small-team coordination without heavyweight enterprise ceremony.
+description: 面向个人或小团队的软件交付工作流，兼顾轻量执行与企业级风险控制，尤其适合前端 1 人、后端 1 人并使用 AI 辅助开发的团队。用于为新项目、老项目重构、技术现代化、性能/UI 升级、功能切片、验证规则、提交/PR 纪律、发布安全和小团队协作制定实用流程，避免引入过重的企业流程。
 ---
 
-# Atom Team Workflow
+# 原子团队工作流
 
-Use this skill to guide personal or small-team software work. It fits solo projects, "one frontend + one backend" teams, and AI-assisted coding where the goal is to move fast without losing rollback, compatibility, or product correctness.
+使用本 skill 指导个人或小团队的软件开发。它适合个人项目、前端 1 人 + 后端 1 人团队，以及 AI 辅助编码场景，目标是在保持速度的同时，不丢掉回滚能力、兼容性和产品正确性。
 
-Core standard:
+核心标准：
 
 ```text
 日常轻、边界硬、高风险重、上下文省、自动化单独管。
 ```
 
-## First Decision
+## 先判断模式
 
-Classify the work before suggesting rules or editing process files:
+在建议规则或修改流程文件前，先判断当前工作属于哪一种：
 
-- **New project**: create the smallest useful harness before building too much.
-- **Legacy refactor**: protect existing behavior first; new technology comes after baseline and rollback.
-- **Feature work**: keep one user capability or one technical topic per change.
-- **Performance/UI modernization**: measure or screenshot before changing; compare after.
-- **Release/AFK automation**: raise guardrails; require clean worktree, bounded tasks, and stop-on-failure.
+- **新项目**：先建立最小可用的项目护栏，不要在产品成型前过度建设流程。
+- **老项目重构**：先保护现有行为；新技术升级必须排在基线和回滚之后。
+- **功能开发**：每次只围绕一个用户能力或一个技术主题推进。
+- **性能/UI 现代化**：修改前先测量或截图，修改后做同口径对比。
+- **发布/AFK 自动化**：提高护栏，要求干净工作区、任务有边界、失败即停。
 
-If the user wants implementation, update the repository's actual guide files or scripts instead of only explaining a process.
+如果用户要你落地实现，优先修改仓库里的真实指南文件或脚本，而不是只解释流程。
 
-## When Not To Use
+## 不适用场景
 
-Do not use this skill as the main tool when the task is mainly:
+如果任务主要是下面这些，不要把本 skill 当作主工具：
 
-- repo harness or agent instruction system design; use a harness-oriented skill
-- multi-session milestone decomposition; use a blueprint-oriented skill
-- pure coding standards, language style, or implementation details; use a narrower technical skill
-- large-organization governance, compliance program design, or PMO process design
+- 仓库 harness、agent 入口、指令系统设计：使用 harness 类 skill。
+- 多会话里程碑拆解：使用 blueprint 类 skill。
+- 纯编码规范、语言风格或具体实现细节：使用更窄的技术 skill。
+- 大组织治理、合规体系、PMO 流程设计：使用专门的组织流程方法。
 
-If another skill owns the narrower job, use this skill only for the small-team delivery lens.
+如果另一个 skill 更准确，本 skill 只提供“小团队交付视角”。
 
-## Progressive Disclosure
+## 渐进披露
 
-Only surface the section that matches the current mode.
+只展开当前模式需要的部分。
 
-- For a quick recommendation, give the mode, 3-5 protective rules, and the validation tier.
-- For a repo change, name the files/scripts to update and the smallest useful check.
-- For a full workflow, expand only the relevant mode sections.
-- Do not restate all universal rules unless they materially change the answer.
+- 用户只要快速建议时，给出模式、3-5 条保护性规则和验证档位。
+- 用户要改仓库时，指出要改的文件/脚本和最小验证。
+- 用户要完整工作流时，只展开相关模式章节。
+- 不要重复罗列所有通用规则，除非它们会改变当前决策。
 
-## Universal Rules
+## 通用规则
 
-Use these as the default for personal and small teams:
+个人和小团队默认使用这些规则：
 
-- **Single-topic change**: one commit or PR expresses one feature, fix, refactor, migration, or workflow update. Cross-layer changes are fine only when they serve the same topic.
-- **One detailed rule source**: keep entry files short; put detailed workflow rules in one canonical document.
-- **Hard architecture boundaries**: UI, API/business logic, data/retrieval/infrastructure responsibilities must not blur.
-- **Two validation tiers**:
-  - Normal: smallest relevant check, targeted test, local smoke, typecheck, or build.
-  - High-risk: real user/service flow, migration safety, permissions, deletion, auth, payment/order/core business path, streaming/async, release, or automation loop.
-- **Context budget**: use `rg` before reading files, inspect small ranges, summarize logs, and avoid loading build output, databases, PDFs, or long console logs unless needed.
-- **Chinese-readable team docs when the team works in Chinese**: keep filenames used by tools if needed, but make the content readable for the humans.
-- **Reuse first**: update existing guide files, scripts, templates, screenshots, recordings, or baseline artifacts instead of creating parallel process files.
+- **单主题变更**：一个 commit 或 PR 只表达一个功能、修复、重构、迁移或流程更新。跨层改动可以接受，但必须服务于同一主题。
+- **唯一详细规则源**：入口文件保持短；详细工作流规则放在一个 canonical 文档里。
+- **架构边界硬**：UI、API/业务逻辑、数据/检索/基础设施职责不能混在一起。
+- **两档验证**：
+  - 普通：最小相关检查、定点测试、本地 smoke、类型检查或 build。
+  - 高风险：真实用户/服务链路、迁移安全、权限、删除、认证、支付/订单/核心业务路径、流式/异步、发布或自动化循环。
+- **上下文预算**：先用 `rg` 定位，再读小范围；总结日志；除非任务需要，不读取构建产物、数据库、PDF 或长 console 日志。
+- **团队读中文就写中文**：工具需要识别的文件名可保留，但内容要让团队成员读得顺。
+- **优先复用**：优先更新已有指南、脚本、模板、截图、录屏或基线材料，不创建平行流程文件。
 
-## AI-Assisted Work Guardrails
+## AI 辅助开发护栏
 
-When AI agents participate in enterprise work:
+企业级工作里使用 AI agent 时：
 
-- Give agents bounded tasks with explicit touched areas, forbidden areas, acceptance criteria, and validation evidence.
-- Require human or owner review for contract changes, permission changes, data migrations, deletion, security-sensitive code, and legacy behavior removal.
-- Check AI-generated changes against architecture boundaries, external contracts, secrets/config handling, and existing tests before merging.
-- Do not accept broad rewrites, speculative cleanup, or dependency upgrades unless they match the declared work mode and rollback plan.
+- 给 agent 的任务必须有明确修改范围、禁止范围、验收标准和验证证据。
+- 合同变更、权限变更、数据迁移、删除、安全敏感代码、遗留行为移除，需要人类或 owner review。
+- 合并前检查 AI 生成改动是否符合架构边界、外部契约、密钥/配置处理方式和现有测试。
+- 不接受宽泛大重写、猜测性清理或依赖升级，除非它们符合声明的工作模式和回滚计划。
 
-## New Project Workflow
+## 新项目工作流
 
-For a new project, avoid over-building the process before the product exists.
+新项目不要在产品还没成型前过度建设流程。
 
-1. Define product goal, target users, non-goals, acceptance criteria, and first vertical slice.
-2. Model the domain lightly: glossary, core entities, state transitions, business boundaries, roles, and permission matrix.
-3. Record architecture decisions only where they matter: module boundaries, API/version strategy, storage, cache, async jobs, auth, and deployment shape.
-4. Design data and API together: schema, indexes, migration/rollback, request/response shape, errors, pagination, idempotency, and versioning.
-5. Define UI experience before implementation: page list, primary flows, empty/loading/error/permission states, responsive needs, and design-system choices.
-6. Add minimal scripts: install, dev, lint/typecheck, build/test, verify if useful.
-7. Build one end-to-end slice before adding more framework, plugin, hook, or subagent machinery.
-8. Add heavier checks only after repeated failures or before release.
+1. 明确产品目标、目标用户、非目标、验收标准和第一个纵向切片。
+2. 轻量建模领域：术语表、核心实体、状态流转、业务边界、角色和权限矩阵。
+3. 只记录真正重要的架构决策：模块边界、API/版本策略、存储、缓存、异步任务、认证和部署形态。
+4. 数据和 API 一起设计：schema、索引、迁移/回滚、请求/响应、错误、分页、幂等和版本策略。
+5. 实现前先定义 UI 体验：页面清单、主流程、空态/加载态/错误态/权限态、响应式要求和设计系统选择。
+6. 加最小脚本：安装、开发启动、lint/typecheck、build/test，必要时加 verify。
+7. 先跑通一个端到端纵向切片，再增加框架、插件、hook 或 subagent 体系。
+8. 只有重复失败或发布前，才加更重的检查。
 
-Good default: `light harness -> vertical slice -> targeted checks -> iterate`.
+好的默认节奏：
 
-## Enterprise New Project Gates
+```text
+轻量护栏 -> 纵向切片 -> 定点检查 -> 迭代
+```
 
-For enterprise-grade new products, add these gates without turning daily work into a ceremony:
+## 企业级新项目门禁
 
-- **Requirements gate**: every milestone has goal, non-goals, users, acceptance criteria, and rollout owner.
-- **NFR baseline**: define minimum security, audit, observability, backup/restore, performance budget, availability, accessibility, and cost expectations.
-- **Permission gate**: define roles, resources, actions, data scope, and audit trail before implementing protected features.
-- **Data gate**: define migration, rollback, seed data, retention, privacy, and indexing strategy before persistent data changes.
-- **API gate**: define contract, error shape, compatibility, idempotency, pagination, and versioning before frontend/backend split work.
-- **Operations gate**: define logs, metrics, alerts, release checklist, rollback path, and post-release observation window before production launch.
-- **Environment and delivery gate**: define dev/staging/production parity, configuration ownership, secret management, CI required checks, deployment artifact traceability, and rollback trigger before the first production release.
+企业级新产品要加这些门禁，但不要把日常开发变成仪式：
 
-## Legacy Refactor Workflow
+- **需求门禁**：每个里程碑都有目标、非目标、用户、验收标准和上线负责人。
+- **非功能基线**：定义最低安全、审计、可观测性、备份恢复、性能预算、可用性、可访问性和成本预期。
+- **权限门禁**：实现受保护功能前，先定义角色、资源、动作、数据范围和审计链路。
+- **数据门禁**：持久化数据变更前，先定义迁移、回滚、种子数据、保留策略、隐私和索引策略。
+- **API 门禁**：前后端拆分开发前，先定义契约、错误格式、兼容性、幂等、分页和版本策略。
+- **运维门禁**：生产发布前，先定义日志、指标、告警、发布检查表、回滚路径和发布后观察窗口。
+- **环境和交付门禁**：首次生产发布前，定义 dev/staging/production 一致性、配置 owner、密钥管理、CI 必跑检查、发布产物可追溯和回滚触发条件。
 
-For an old company project, the first job is not to introduce new technology. The first job is to avoid breaking current business.
+## 老项目重构工作流
 
-1. Inventory the touched area before implementation: routes/pages, APIs, data tables, permissions, jobs, third-party integrations, known bugs, and business-critical flows.
-2. Identify core flows that must not break: login, permissions, key forms, list/detail, create/edit/delete, payment/order/approval/export/upload, scheduled jobs, or company-specific critical paths.
-3. Record a baseline before changing code:
-   - screenshots or screen recordings for key pages
-   - API inputs/outputs for key endpoints
-   - performance numbers for slow pages or queries
-   - known bugs and intentional current behavior
-4. Pick a pilot module that is representative but not the riskiest.
-5. Separate work types:
-   - refactor: preserve behavior
-   - technology upgrade: change platform or dependencies
-   - performance: improve measured bottlenecks
-   - UI redesign: change experience and layout
-   - feature change: change business capability
-6. Preserve compatibility first. For backend, avoid breaking API contracts and migrations without rollback or backup. For frontend, use routes, feature flags, adapters, or side-by-side replacement when possible.
-7. Move module by module. After the pilot proves the pattern, repeat with the same checklist.
+公司老项目重构的第一目标不是引入新技术，而是不破坏现有业务。
 
-Rule of thumb:
+1. 实现前先盘点受影响范围：路由/页面、API、数据表、权限、任务、第三方集成、已知 bug 和业务关键流程。
+2. 找出不能坏的核心流程：登录、权限、关键表单、列表/详情、创建/编辑/删除、支付/订单/审批/导出/上传、定时任务或公司特有关键路径。
+3. 改代码前记录基线：
+   - 关键页面截图或录屏
+   - 关键接口输入/输出
+   - 慢页面或慢查询的性能数字
+   - 已知 bug 和当前刻意保留的行为
+4. 选择一个有代表性但不是最高风险的试点模块。
+5. 拆分工作类型：
+   - 重构：保持行为不变
+   - 技术升级：改变平台或依赖
+   - 性能优化：改善已测量瓶颈
+   - UI 改版：改变体验和布局
+   - 功能改造：改变业务能力
+6. 兼容优先。后端不要在没有回滚或备份的情况下破坏 API 契约和迁移；前端优先使用路由、feature flag、adapter 或并行替换。
+7. 按模块推进。试点证明模式可行后，用同一 checklist 复制到其他模块。
+
+经验句：
 
 ```text
 先保真，再变快，再变新，再变好看。
 ```
 
-## Enterprise Legacy Refactor Rules
+## 企业级老项目重构规则
 
-Use these as hard gates for enterprise legacy refactors:
+企业级老项目重构时，把这些作为硬门禁：
 
-- Do not start implementation before the touched area has a baseline inventory.
-- Split modernization into tracks: behavior-preserving refactor, dependency/framework upgrade, performance work, UI redesign, and feature change. Do not combine tracks in one PR unless explicitly justified.
-- Label each touched module with business risk, data risk, compatibility risk, rollout risk, and rollback method.
-- Preserve external contracts by default: URLs, API shapes, error codes, auth behavior, export/import formats, database semantics, and existing visible behavior.
-- For high-risk replacements, require one of: feature flag, side-by-side route/module, adapter layer, shadow mode, or documented rollback.
-- Capture performance baselines before changing performance-sensitive code; compare after using the same measurement method.
-- Capture UI screenshots for key states before redesign: default, loading, empty, error, permission denied, and data-heavy state.
-- For legacy usage decisions, runtime evidence outranks static search. Before removing or changing externally visible behavior, check logs, traffic, database usage, scheduled jobs, downstream callers, owner confirmation, or production-like telemetry where available.
-- AI agents must not delete legacy logic only because it appears unused. First prove usage with search, runtime evidence, owner confirmation, or tests.
-- Large rewrites are forbidden by default. Prefer strangler replacement, module-by-module migration, adapters, and compatibility layers.
-- A pilot is proven only when baseline behavior is preserved, validation passes, rollback is documented, and the pattern can handle at least one harder module.
+- 受影响范围没有基线盘点前，不开始实现。
+- 把现代化拆成不同轨道：保行为重构、依赖/框架升级、性能优化、UI 改版、功能变更。除非明确说明原因，否则一个 PR 不混多个轨道。
+- 每个受影响模块都标注业务风险、数据风险、兼容风险、上线风险和回滚方法。
+- 默认保留外部契约：URL、API 形状、错误码、认证行为、导入/导出格式、数据库语义和现有可见行为。
+- 高风险替换必须至少具备一种保护：feature flag、并行路由/模块、adapter 层、shadow mode 或已记录回滚方式。
+- 修改性能敏感代码前记录性能基线；修改后用同一测量方法对比。
+- UI 改版前记录关键状态截图：默认、加载、空态、错误、无权限和数据密集状态。
+- 判断遗留用法时，运行时证据优先于静态搜索。移除或改变对外可见行为前，尽量检查日志、流量、数据库使用痕迹、定时任务、下游调用方、owner 确认或类生产 telemetry。
+- AI agent 不能因为遗留逻辑“看起来没用”就删除。先用搜索、运行时证据、owner 确认或测试证明。
+- 默认禁止大重写。优先使用 strangler replacement、模块化迁移、adapter 和兼容层。
+- 试点只有在基线行为保留、验证通过、回滚已记录，并且模式能处理至少一个更难模块时，才算证明成功。
 
-## Frontend/Backend 1+1 Collaboration
+## 前后端 1+1 协作
 
-For one frontend developer and one backend developer:
+前端 1 人、后端 1 人协作时：
 
-- Start each slice with a contract: endpoint shape, auth/permission behavior, error shape, loading/empty/error UI, and rollback expectation.
-- Backend should provide stable contracts or mocks early; frontend should expose UI states without waiting for perfect backend data.
-- Do not hide missing backend capability with fake frontend completion.
-- Keep integration checks small but real on critical paths.
-- When frontend and backend change together for one capability, a single topic is acceptable; unrelated cleanup should be separate.
-- For each slice, confirm requirement, contract, data shape, permission behavior, UI states, validation method, migration needs, and rollback owner.
+- 每个切片从契约开始：接口形状、认证/权限行为、错误格式、加载/空态/错误 UI 和回滚预期。
+- 后端尽早提供稳定契约或 mock；前端先暴露完整 UI 状态，不要等后端数据完美才动。
+- 不要用前端假完成掩盖缺失的后端能力。
+- 核心路径的联调检查要小，但必须真实。
+- 前后端为同一能力一起改动时，可以放在同一主题里；无关清理要拆开。
+- 每个切片确认需求、契约、数据形状、权限行为、UI 状态、验证方式、迁移需求和回滚 owner。
 
-## Validation Guide
+## 验证指南
 
-Use the cheapest check that proves the actual risk.
+使用能证明真实风险的最便宜检查。
 
-Normal examples:
+普通例子：
 
-- docs/process change: syntax or link scan, maybe no runtime check
-- small UI state change: component/page smoke or targeted browser check
-- ordinary API field: targeted request or unit/integration test
-- utility refactor: focused test or direct function assertion
+- 文档/流程改动：语法或链接扫描，可能不需要运行时检查。
+- 小 UI 状态改动：组件/页面 smoke 或定点浏览器检查。
+- 普通 API 字段：定点请求或单元/集成测试。
+- 工具函数重构：聚焦测试或直接函数断言。
 
-High-risk examples:
+高风险例子：
 
-- auth, permissions, payments, orders, deletion, data migration
-- upload/import/export, async jobs, queues, streaming, retries
-- core pages or core business paths
-- cross-service contracts
-- release, deployment, feature flags, AFK/agent automation
+- 认证、权限、支付、订单、删除、数据迁移
+- 上传/导入/导出、异步任务、队列、流式、重试
+- 核心页面或核心业务路径
+- 跨服务契约
+- 发布、部署、feature flag、AFK/agent 自动化
 
-For high-risk work, collect evidence but keep it concise: command names, short result, screenshot path if useful, and the specific path tested.
+高风险工作要收集证据，但保持简洁：命令名、短结果、必要时的截图路径，以及实际验证过的路径。
 
-## Release And Evolution
+## 发布和演进
 
-For release, migration, or high-risk refactor:
+发布、迁移或高风险重构时：
 
-- Release in small batches when possible.
-- Define monitoring, smoke checks, rollback steps, owner, and observation window.
-- For data migrations, require dry-run or rehearsal on production-like data when feasible, backup/restore verification, idempotency or rerun behavior, rollback limits, and post-migration data validation queries.
-- Keep a post-release checklist: core flow works, errors are normal, metrics are within budget, support/ops signals are quiet.
-- If a release changes data or contracts, document backup/restore or compatibility strategy before deployment.
+- 尽可能小批量发布。
+- 定义监控、smoke 检查、回滚步骤、owner 和观察窗口。
+- 数据迁移尽量在类生产数据上 dry-run 或演练，验证备份/恢复、幂等或重复执行行为、回滚边界和迁移后数据校验查询。
+- 发布后检查：核心流程可用、错误正常、指标在预算内、支持/运维信号安静。
+- 如果发布改变数据或契约，部署前记录备份/恢复或兼容策略。
 
-## Commit And PR Shape
+## Commit 和 PR 形状
 
-Prefer this structure:
-
-```text
-Goal: what user/business/technical outcome this change delivers
-Change: what changed, grouped by area
-Validation: smallest checks run, with high-risk flow evidence if applicable
-Risk: compatibility, rollback, migration, or known remaining risk
-```
-
-Shortest example:
+优先使用这个结构：
 
 ```text
-Goal: speed up customer search without changing visible behavior
-Change: added indexed query path behind existing API contract
-Validation: search smoke, slow-query comparison, existing permission test
-Risk: rollback by disabling new query path
+目标：这个变更交付的用户/业务/技术结果
+改动：实际改了什么，按区域归类
+验证：跑了哪些最小检查；高风险时附关键链路证据
+风险：兼容性、回滚、迁移或已知剩余风险
 ```
 
-Commit message guidance:
+最短示例：
 
-- Use conventional commits if the repo does.
-- Prefer local team language for descriptions.
-- Keep one topic per commit.
-- Do not add AI footer text unless the repo explicitly requires it.
+```text
+目标：在不改变可见行为的前提下加快客户搜索
+改动：在既有 API 契约后面增加索引查询路径
+验证：搜索 smoke、慢查询对比、既有权限测试
+风险：可通过关闭新查询路径回滚
+```
 
-## When To Add More Process
+提交信息建议：
 
-Add guardrails only when they pay for themselves:
+- 仓库已有 Conventional Commits 就沿用。
+- 描述使用团队本地语言。
+- 每个 commit 保持单主题。
+- 不加 AI footer，除非仓库明确要求。
 
-- repeated mistakes -> add a checklist or deterministic check
-- risky command or data operation -> add a hook, script, or human approval gate
-- release or migration -> add rollback and verification steps
-- team handoff confusion -> add a short canonical doc
-- long-running AI automation -> add queue, clean-worktree rule, stop-on-failure, and context budget
+## 什么时候加流程
 
-Avoid adding process for one-off preferences, speculative future scale, or problems that have not appeared yet.
+只有流程能回本时才加护栏：
 
-## Expected Output
+- 重复犯错 -> 加 checklist 或确定性检查。
+- 高风险命令或数据操作 -> 加 hook、脚本或人工确认门。
+- 发布或迁移 -> 加回滚和验证步骤。
+- 团队交接混乱 -> 加一份短 canonical 文档。
+- 长时间 AI 自动化 -> 加队列、干净工作区、失败即停和上下文预算。
 
-When asked to design or update a workflow, produce or implement:
+不要为了单次偏好、想象中的未来规模或尚未出现的问题加流程。
 
-1. Mode: new project / legacy refactor / feature / performance / UI / release / AFK.
-2. Minimal rules: 3-5 rules that protect this mode.
-3. High-risk items: concrete risks for this project.
-4. Baseline: behavior, screenshot, API, data, performance, or NFR evidence needed before work.
-5. Validation: smallest check that proves the change.
-6. Commit/PR shape: one-topic summary format.
-7. Repo changes: files, scripts, templates, or docs that should change.
-8. Residual risk: anything still not fully verified.
+## 期望输出
 
-Keep the answer practical. If editing a repo, make the smallest useful change and verify it with lightweight checks.
+当用户要求设计或更新工作流时，输出或实现：
+
+1. 模式：新项目 / 老项目重构 / 功能 / 性能 / UI / 发布 / AFK。
+2. 最小规则：保护当前模式的 3-5 条规则。
+3. 高风险项：这个项目的具体风险。
+4. 基线：开始前需要的行为、截图、API、数据、性能或非功能证据。
+5. 验证：能证明变更的最小检查。
+6. 提交/PR 形状：单主题摘要格式。
+7. 仓库改动：需要修改的文件、脚本、模板或文档。
+8. 剩余风险：仍未完全验证的风险。
+
+保持回答实用。如果是在改仓库，就做最小有用修改，并用轻量检查验证。
