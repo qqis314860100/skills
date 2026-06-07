@@ -1,0 +1,59 @@
+[
+  {
+    "name": "prompt review asks for original prompt",
+    "input": "帮我优化这个 prompt",
+    "should_trigger": true,
+    "expected_refs": ["prompt-review.md"],
+    "expected_weight": "Level 2",
+    "expect_ask_for_original_prompt": true
+  },
+  {
+    "name": "ordinary bugfix should not be intercepted",
+    "input": "帮我修复登录按钮点击没反应",
+    "should_trigger": false,
+    "expected_refs": [],
+    "expected_weight": null
+  },
+  {
+    "name": "tiny edit should not be intercepted",
+    "input": "把按钮文案改成保存",
+    "should_trigger": false,
+    "expected_refs": [],
+    "expected_weight": null
+  },
+  {
+    "name": "compile fuzzy task into Claude Code prompt",
+    "input": "把这个需求转成 Claude Code 能执行的 prompt",
+    "should_trigger": true,
+    "expected_refs": ["task-types.md", "prompt-weights.md"],
+    "expected_weight": "Level 2"
+  },
+  {
+    "name": "legacy UI plan with CPD routes to UI and capability references",
+    "input": "老项目 UI 改造方案该怎么写提示词，并加入 CPD",
+    "should_trigger": true,
+    "expected_refs": ["ui-ux.md", "capability-routing.md"],
+    "expected_weight": "Level 3"
+  },
+  {
+    "name": "direct dashboard UI work should not be intercepted",
+    "input": "优化 dashboard UI",
+    "should_trigger": false,
+    "expected_refs": [],
+    "expected_weight": null
+  },
+  {
+    "name": "legacy refactor prompt with capability routing",
+    "input": "为老项目重构写一个 prompt，并加入 superpower/CPD 和 frontend-design 路由",
+    "should_trigger": true,
+    "expected_refs": ["coding.md", "capability-routing.md"],
+    "expected_weight": "Level 3"
+  },
+  {
+    "name": "persist workflow into project instructions",
+    "input": "把这套 workflow 沉淀成 AGENTS.md",
+    "should_trigger": true,
+    "expected_refs": ["agent-workflow.md"],
+    "expected_weight": "Level 4"
+  }
+]
