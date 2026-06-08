@@ -21,6 +21,22 @@ Use this skill when the user asks to:
 
 Do not use this skill just because the underlying task is coding, design, or bug fixing. If the user says "fix this bug" or "update this UI", do the task directly unless they ask for a prompt.
 
+## Task Brief Confirmation
+
+For complex, ambiguous, high-risk, multi-skill, or user-authorized routing work, output a concise `Task Brief` before execution. This is a lightweight confirmation gate, not a full plan.
+
+Do not use a Task Brief for tiny edits, ordinary bug fixes, or clear direct implementation requests.
+
+A Task Brief should confirm:
+
+- understood goal
+- recommended process
+- capability routing and confidence
+- explicit non-goals
+- next step after confirmation
+
+If the user confirms, proceed with the chosen skill or workflow. If the user rejects the route, revise the brief.
+
 ## Core Workflow
 
 1. Identify the user's real request:
@@ -41,8 +57,9 @@ Do not use this skill just because the underlying task is coding, design, or bug
    - verification contract
    - report format
    - capability routing
-5. If domain expertise is needed, route to the smallest useful capability set. See [capability-routing.md](references/capability-routing.md).
-6. Output ready-to-copy prompt text. Include short/standard/heavy variants only when useful.
+5. If routing is complex or uncertain, produce a Task Brief first.
+6. If domain expertise is needed, route to the smallest useful capability set. See [capability-routing.md](references/capability-routing.md).
+7. Output ready-to-copy prompt text. Include short/standard/heavy variants only when useful.
 
 ## Missing Information
 
@@ -81,6 +98,8 @@ Use three routing modes:
 
 Default to the smallest capability set. Do not route tiny edits. Do not let brainstorming override business constraints, tests, or existing logic.
 
+If Superpowers is available, do not duplicate its full development workflow. Prompt Compiler should clarify the task and route to Superpowers phases when useful; Superpowers owns brainstorming, planning, TDD, subagent development, review, verification, and branch finishing.
+
 ## Output Patterns
 
 For prompt creation, usually output:
@@ -93,6 +112,27 @@ For prompt creation, usually output:
 ## When To Use
 
 [brief note]
+```
+
+For complex routing confirmation, output:
+
+```markdown
+## Task Brief
+
+I understand the goal as:
+- [goal]
+
+Recommended process:
+- [process]
+
+Capability routing:
+- `[skill]`: [suggest/invoke/embed + confidence + reason]
+
+Non-goals:
+- [what not to do]
+
+After confirmation:
+- [next step]
 ```
 
 For prompt review, output:

@@ -78,8 +78,10 @@ def check_structure() -> None:
     for boundary in [
         "Do not use this skill just because the underlying task is coding",
         "Always ask for the original prompt",
+        "Task Brief",
         "Default to the smallest capability set",
         "Do not route tiny edits",
+        "do not duplicate its full development workflow",
         "`suggest`",
         "`invoke`",
         "`embed`",
@@ -126,6 +128,8 @@ def check_cases() -> None:
             weight = case.get("expected_weight")
             if weight not in {"Level 0", "Level 1", "Level 2", "Level 3", "Level 4"}:
                 fail(f"triggering case {name} has invalid expected_weight: {weight}")
+            if case.get("expect_task_brief") and weight not in {"Level 3", "Level 4"}:
+                fail(f"case {name} expects a Task Brief but is too light: {weight}")
         else:
             skip_count += 1
             if refs:

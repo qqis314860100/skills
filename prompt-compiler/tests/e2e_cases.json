@@ -33,7 +33,8 @@
     "input": "老项目 UI 改造方案该怎么写提示词，并加入 CPD",
     "should_trigger": true,
     "expected_refs": ["ui-ux.md", "capability-routing.md"],
-    "expected_weight": "Level 3"
+    "expected_weight": "Level 3",
+    "expect_task_brief": true
   },
   {
     "name": "direct dashboard UI work should not be intercepted",
@@ -47,7 +48,16 @@
     "input": "为老项目重构写一个 prompt，并加入 superpower/CPD 和 frontend-design 路由",
     "should_trigger": true,
     "expected_refs": ["coding.md", "capability-routing.md"],
-    "expected_weight": "Level 3"
+    "expected_weight": "Level 3",
+    "expect_task_brief": true
+  },
+  {
+    "name": "explicit auto routing uses confirmation gate",
+    "input": "交给 prompt-compiler 自动路由这个复杂任务",
+    "should_trigger": true,
+    "expected_refs": ["task-types.md", "capability-routing.md"],
+    "expected_weight": "Level 3",
+    "expect_task_brief": true
   },
   {
     "name": "persist workflow into project instructions",
